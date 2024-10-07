@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success</title>
+    <link rel="stylesheet" href="{% static 'quotes/css/styles.css' %}">  <!-- Link to your CSS file -->
+</head>
+<body>
+    <div class="container">
+        <h1>Images Generated Successfully!</h1>
+        <p>Your quote images have been generated successfully. You can now view them in the output folder.</p>
+        <a class="button" href="{% url 'upload_quotes' %}">Upload Another File</a>
+    </div>
+</body>
+</html>

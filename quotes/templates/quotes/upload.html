@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Quotes</title>
+    <link rel="stylesheet" href="{% static 'quotes/css/styles.css' %}">  <!-- Link to your CSS file -->
+</head>
+<body>
+    <h1>Upload Quotes File</h1>
+    <form action="{% url 'upload_quotes' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="quotes_file" accept=".json" required>
+        <button type="submit">Upload</button>
+    </form>
+</body>
+</html>
