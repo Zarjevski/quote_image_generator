@@ -1,7 +1,7 @@
 import os
 import random
 import uuid
-import json  # Add this line to import the json module
+import json
 from PIL import Image, ImageDraw, ImageFont
 
 class QuoteImageGenerator:
@@ -16,7 +16,7 @@ class QuoteImageGenerator:
         self.quotes_data = self.load_quotes()
 
     def load_quotes(self):
-        """Load quotes from the JSON file."""
+        """Load quotes from the JSON file that contains multiple objects."""
         with open(self.quotes_file, 'r') as f:
             return json.load(f)
 
@@ -108,12 +108,18 @@ class QuoteImageGenerator:
         print(f"Generated image for {author}: {output_path}")
 
     def generate_images(self):
-        """Generate images for all quotes."""
+        """Generate images for all quotes and delete the quotes file."""
         os.makedirs(self.output_dir, exist_ok=True)
 
-        for stoic in self.quotes_data['stoics']:
-            author = stoic['name']
-            quotes = stoic['quotes']
+        # Iterate through multiple author objects
+        for author_data in self.quotes_data:
+            author = author_data["name"]
+            quotes = author_data["quotes"]
             
             for quote in quotes:
                 self.generate_quote_image(quote, author)
+        
+        # Remove the uploaded JSON file after processing
+        if os.path.exists(self.quotes_file):
+            os.remove(self.quotes_file)
+            print(f"Deleted quotes file: {self.quotes_file}")
